@@ -1,0 +1,35 @@
+package.json  {
+  "name": "base-builder-rewards-boost",
+  "version": "1.0.0",
+  "description": "Repository created to boost Base Builder Rewards activity with meaningful contributions to the Base ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "deploy": "hardhat deploy --network base",
+    "compile": "hardhat compile"
+  },
+  "keywords": [
+    "base",
+    "blockchain",
+    "defi",
+    "smart-contracts",
+    "ethereum",
+    "layer2",
+    "builder-rewards"
+  ],
+  "author": "wearedood",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.9.0",
+    "hardhat": "^2.17.0",
+    "ethers": "^6.7.0",
+    "web3": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0"
+  }
+}
