@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Builder Rewards Analytics Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>🏗️ Base Builder Rewards Analytics</h1>
+            <div class="network-status">
+                <span id="network-indicator" class="status-indicator"></span>
+                <span id="network-text">Connecting to Base...</span>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <!-- Real-time Metrics Section -->
+            <section class="metrics-section">
+                <h2>📊 Real-time Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>Total Rewards Distributed</h3>
+                        <div class="metric-value" id="total-rewards">Loading...</div>
+                        <div class="metric-unit">ETH</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Active Participants</h3>
+                        <div class="metric-value" id="active-participants">Loading...</div>
+                        <div class="metric-unit">builders</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Weekly Contributions</h3>
+                        <div class="metric-value" id="weekly-contributions">Loading...</div>
+                        <div class="metric-unit">commits</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Success Rate</h3>
+                        <div class="metric-value" id="success-rate">Loading...</div>
+                        <div class="metric-unit">%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="charts-section">
+                <div class="chart-container">
+                    <h3>📈 Reward Distribution Trends</h3>
+                    <canvas id="rewards-chart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>🏆 Top Contributors</h3>
+                    <canvas id="contributors-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Activity Heatmap -->
+            <section class="heatmap-section">
+                <h3>🔥 Activity Heatmap</h3>
+                <div id="activity-heatmap" class="heatmap-container">
+                    <!-- Heatmap will be generated here -->
+                </div>
+            </section>
+
+            <!-- Leaderboard -->
+            <section class="leaderboard-section">
+                <h3>🥇 Builder Leaderboard</h3>
+                <div class="leaderboard-container">
+                    <table id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Builder</th>
+                                <th>Contributions</th>
+                                <th>Rewards Earned</th>
+                                <th>Last Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Leaderboard data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
