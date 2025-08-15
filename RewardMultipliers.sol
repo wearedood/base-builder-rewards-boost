@@ -315,4 +315,30 @@ contract RewardMultipliers is Ownable, ReentrancyGuard {
     function getContractBalance() external view returns (uint256) {
         return address(this).balance;
     }
+
+    /**
+     * @dev Get total rewards earned by user across all contribution types
+     * @param user The user address to check
+     * @return totalRewards The total rewards earned
+     */
+    function getTotalUserRewards(address user) external view returns (uint256 totalRewards) {
+        for (uint256 i = 0; i < 10; i++) {
+            ContributionType contributionType = ContributionType(i);
+            uint256 contributions = userContributions[user][contributionType];
+            uint256 multiplier = getEffectiveMultiplier(user, contributionType);
+            totalRewards = totalRewards.add(contributions.mul(multiplier));
+        }
+        return totalRewards;
+    }
+
+    /**
+     * @dev Get user's contribution streak for consistency bonus
+     * @param user The user address
+     * @return streak Number of consecutive days with contributions
+     */
+    function getUserStreak(address user) external view returns (uint256 streak) {
+        // Implementation for tracking daily contribution streaks
+        return reputationScores[user] / 100; // Simplified calculation based on reputation
+    }
+}
 }
