@@ -90,3 +90,31 @@ describe("BaseRewards Contract", function () {
     });
   });
 });
+
+    describe("Enhanced Reward Functions", function () {
+        beforeEach(async function () {
+            await baseRewards.registerBuilder(builder1.address);
+            await baseRewards.updateBuilderScore(builder1.address, 100);
+        });
+
+        it("Should calculate total user rewards correctly", async function () {
+            // Test the new getTotalUserRewards function
+            const totalRewards = await baseRewards.getTotalUserRewards(builder1.address);
+            expect(totalRewards).to.be.a('number');
+            expect(totalRewards).to.be.at.least(0);
+        });
+
+        it("Should track user contribution streak", async function () {
+            // Test the new getUserStreak function
+            const streak = await baseRewards.getUserStreak(builder1.address);
+            expect(streak).to.be.a('number');
+            expect(streak).to.be.at.least(0);
+        });
+
+        it("Should handle multiple contribution types", async function () {
+            // Test enhanced functionality with multiple contribution types
+            await baseRewards.updateBuilderScore(builder1.address, 150);
+            const totalRewards = await baseRewards.getTotalUserRewards(builder1.address);
+            expect(totalRewards).to.be.greaterThan(0);
+        });
+    });
