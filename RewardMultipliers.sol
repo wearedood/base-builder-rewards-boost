@@ -339,6 +339,51 @@ contract RewardMultipliers is Ownable, ReentrancyGuard {
     function getUserStreak(address user) external view returns (uint256 streak) {
         // Implementation for tracking daily contribution streaks
         return reputationScores[user] / 100; // Simplified calculation based on reputation
+    
+
+    /**
+     * @dev Calculate pending rewards for a user with multipliers applied
+     * @param user The user address to calculate rewards for
+     * @param baseReward The base reward amount before multipliers
+     * @param contributionType The type of contribution
+     * @param qualityScore The quality score (0-100)
+     * @return pendingRewards The total pending rewards with multipliers applied
+     */
+    function calculatePendingRewards(
+        address user,
+        uint256 baseReward,
+        ContributionType contributionType,
+        uint256 qualityScore
+    ) external view returns (uint256 pendingRewards) {
+        require(baseReward > 0, "Base reward must be greater than 0");
+        require(qualityScore <= 100, "Quality score must be <= 100");
+        
+        // Get the effective multiplier for this contribution
+        uint256 multiplier = getEffectiveMultiplier(user, contributionType);
+        
+        // Apply quality bonus if score is above threshold
+        if (qualityScore >= QUALITY_THRESHOLD) {
+            uint256 qualityBonus = multipliers[contributionType].qualityBonus;
+            multiplier = multiplier.add(qualityBonus);
+        }
+        
+        // Calculate final reward with multiplier
+        pendingRewards = baseReward.mul(multiplier).div(BASE_MULTIPLIER);
+        
+        return pendingRewards;
     }
+
+    /**
+     * @dev Get effective multiplier for a user's contribution (internal helper)
+     * @param user The user address
+     * @param contributionType The type of contribution
+     * @return effectiveMultiplier The effective multiplier value
+     */
+    function getEffectiveMultiplier(
+        address user,
+        ContributionType contributionType
+    ) public view returns (uint256 effectiveMultiplier) {
+        return calculateMultiplier(user, contributionType, 50, false); // Use default quality score
+    }}
 }
 }
